@@ -22,7 +22,7 @@ const Header = () => {
           <img
             src={Logo}
             alt="logo"
-            className="w-[200px] md:w-150 sm:w-100 xs:w-40"
+            className="w-[200px] md:w-150 sm:w-100 xs:w-40 cursor-pointer"
           />
         </div>
         <button

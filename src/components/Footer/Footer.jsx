@@ -10,13 +10,21 @@ const Footer = () => {
       <div className="flex flex-wrap xs:flex-col border-t-[1px] py-6 border-border">
         <div className="w-1/6 md:w-1/2 pr-10 md:pr-5 xs:pr-0 xs:w-full md:mb-5 xs:mb-2">
           <div className="mb-2 xs:mb-2">
-            <img className="w-[180px]" src={Logo} alt="Logo" />
+            <img className="w-[180px] cursor-pointer" src={Logo} alt="Logo" />
           </div>
           <div className="pb-3">
-            <img src={GooglePlayStore} alt="logo" className="w-[150] xs:w-40" />
+            <img
+              src={GooglePlayStore}
+              alt="logo"
+              className="w-[150] xs:w-40 cursor-pointer"
+            />
           </div>
           <div>
-            <img src={AppStore} alt="logo" className="w-[150] xs:w-40" />
+            <img
+              src={AppStore}
+              alt="logo"
+              className="w-[150] xs:w-40 cursor-pointer"
+            />
           </div>
           <p className="text-sm mt-6">© 2024 DocHub, LLC</p>
         </div>
@@ -120,8 +128,8 @@ const Footer = () => {
               <a href="/">Brookline, MA 02445</a>
             </li>
           </ul>
-          <div className="flex items-center mt-3">
-            <img src={Twitter} alt="twitter" className="w-6 cursor-pointer text-xs" />
+          <div className="flex items-center mt-3 cursor-pointer">
+            <img src={Twitter} alt="twitter" className="w-6 text-xs" />
             <p>Follow Us</p>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const GenerateKeyPopup = () => {
   return (
-    <div className="p-6">
+    <div className="p-6 sm:p-3 xs:p-1">
       <div className="mb-4">
         <label htmlFor="name" className="block text-sm font-medium text-gray">
           Name
@@ -10,7 +10,7 @@ const GenerateKeyPopup = () => {
         <input
           id="name"
           type="text"
-          className="mt-1 p-2 w-full border border-primary rounded focus:outline-none"
+          className="mt-1 p-2 w-full border focus:shadow-inner border-primary bg-inputBg rounded focus:outline-none"
           placeholder="Enter your name"
         />
       </div>
@@ -21,7 +21,7 @@ const GenerateKeyPopup = () => {
         <input
           id="email"
           type="email"
-          className="mt-1 p-2 w-full border border-primary rounded focus:outline-none"
+          className="mt-1 p-2 w-full border focus:shadow-inner border-primary bg-inputBg rounded focus:outline-none"
           placeholder="Enter your email"
         />
       </div>
@@ -32,7 +32,7 @@ const GenerateKeyPopup = () => {
         <input
           id="website"
           type="website"
-          className="mt-1 p-2 w-full border border-primary rounded focus:outline-none"
+          className="mt-1 p-2 w-full border focus:shadow-inner border-primary bg-inputBg rounded focus:outline-none"
           placeholder="Enter your website"
         />
       </div>

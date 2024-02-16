@@ -23,7 +23,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        mainBg:"#FDFDFD",
+        mainBg: "#FDFDFD",
         primary: "#E2E9FC",
         grey: "#414141",
         darkGrey: "#5A5A5A",
@@ -39,9 +39,9 @@ module.exports = {
         ratingsColor: "#171717",
         success: "#05B368",
         border: "#e4e4e4",
+        inputBg: "#F1F1F1",
       },
       boxShadow: {
-        "header-shadow": "0px 10px 50px rgba(0, 0, 0, 0.1)",
         "navbar-button": "0px 10px 50px rgba(0, 0, 0, 0.08)",
       },
     },

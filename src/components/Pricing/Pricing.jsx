@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import { Slider } from "antd";
-import { Flex, Radio } from "antd";
+import { Slider, Radio } from "antd";
+import { Flex } from "antd";
+import { commafy } from "../../Utils/commafy";
 
 const Pricing = () => {
-  const [disabled, setDisabled] = useState(false);
+  const [fileCount, setFileCount] = useState(500);
+
+  const onChangeSlider = (value) => {
+    console.log("onChange: ", value);
+    setFileCount(value);
+  };
+
+  const onChangeComplete = (value) => {
+    console.log("onChangeComplete: ", value);
+  };
+
   return (
     <div className="px-40 lg:px-8 xs:px-4 mt-8 text-center">
       <div className="shadow-navbar-button py-7 rounded-md">
@@ -16,11 +27,19 @@ const Pricing = () => {
         <div className="flex justify-around items-center gap-2 sm:flex-col sm:gap-3">
           <div>
             <p className="text-converterColor sm:text-sm">
-              When Converting <span className="text-primary">14,000</span> files
+              When Converting{" "}
+              <span className="text-primary">{commafy(fileCount)}</span> files
             </p>
           </div>
           <div className="w-[8rem]">
-            <Slider range defaultValue={[20, 50]} disabled={disabled} />
+            <Slider
+              defaultValue={14000}
+              onChange={onChangeSlider}
+              onChangeComplete={onChangeComplete}
+              min={500}
+              max={1000000}
+              step={1000}
+            />
           </div>
           <div>
             <Flex vertical gap="middle">
@@ -33,7 +52,7 @@ const Pricing = () => {
         </div>
         <p className="text-converterColor mt-3 sm:text-sm sm:px-1">
           Corresponds to a one-time payment of{" "}
-          <span className="font-bold">$176.00.</span> Checkout the full{" "}
+          <span className="font-bold">$5.00</span>. Checkout the full
           <span className="text-primary">pricing</span> information.
         </p>
       </div>

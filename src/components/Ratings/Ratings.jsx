@@ -1,17 +1,38 @@
-import React from "react";
+import React,{useState} from "react";
 import { ratings_data } from "../../Data/RatingsData";
+import { Modal } from "antd";
+import ReviewPopup from "../../Utils/Modals/ReviewPopup/ReviewPopup";
 
 const Ratings = () => {
+ const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+
+   const showModal = () => {
+     setIsReviewModalOpen(true);
+   };
+   const handleOk = () => {
+     setIsReviewModalOpen(false);
+   };
+   const handleCancel = () => {
+     setIsReviewModalOpen(false);
+   };
   return (
     <div className="px-40 xl:px-8 xs:px-4">
-      <h1 className="text-[44px] font-bold mt-12 lg:text-2xl sm:text-lg sm:text-center sm:mt-5">
-        See why our customers choose DocHub
-      </h1>
+      <div className="flex justify-between mt-12 items-center sm:mt-1 sm:flex-col">
+        <h1 className="text-[44px] font-bold lg:text-2xl sm:text-lg sm:text-center sm:mt-5">
+          See why our customers choose DocHub
+        </h1>
+        <button
+          className="bg-primary text-grey px-5 py-1 rounded-md sm:mt-2"
+          onClick={showModal}
+        >
+          Give Review
+        </button>
+      </div>
       <div className="flex justify-between flex-wrap mt-10 text-ratingsColor sm:mt-5 md:gap-3">
         {ratings_data.map((ratings, i) => {
           return (
             <div
-              className="w-[32%] md:w-[40%] h-[364px] sm:w-[100%] shadow-navbar-button p-7 rounded-md flex flex-col md:p-3"
+              className="w-[32%] md:w-[40%] h-[364px] sm:w-[100%] shadow-navbar-button p-7 rounded-md flex flex-col cursor-pointer md:p-3"
               key={i}
             >
               <div className="flex justify-between items-center pb-3">
@@ -36,6 +57,26 @@ const Ratings = () => {
           );
         })}
       </div>
+      <Modal
+        title={
+          <div>
+            <span>Give Review</span>
+            <div
+              style={{
+                borderBottom: "1px solid #e4e4e4",
+                paddingBottom: "10px",
+              }}
+            ></div>
+          </div>
+        }
+        visible={isReviewModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        cancelButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{ style: { display: "none" } }}
+      >
+        <ReviewPopup />
+      </Modal>
     </div>
   );
 };
