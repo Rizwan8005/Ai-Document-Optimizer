@@ -5,6 +5,7 @@ import GenerateKeyPopup from '../../Utils/Modals/GenerateKeyPopup/GenerateKeyPop
 
 const Header = () => {
  const [isModalOpen, setIsModalOpen] = useState(false);
+ const [shouldResetForm, setShouldResetForm] = useState(true);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -45,11 +46,17 @@ const Header = () => {
         title="Generate Key"
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={() => {
+          handleCancel(); // Remove the extra closing parenthesis
+          setShouldResetForm(true);
+        }}
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
       >
-        <GenerateKeyPopup />
+        <GenerateKeyPopup
+          shouldResetForm={shouldResetForm}
+          setShouldResetForm={setShouldResetForm}
+        />
       </Modal>
     </div>
   );

@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Rate } from "antd";
+import { useUserReviewMutation } from "../../../store/services/services";
+import { toast } from "react-toastify";
+import {useDispatch} from 'react-redux'
+import { setSuccess } from "../../../store/slices/statusSlice";
 
-const ReviewPopup = () => {
+const ReviewPopup = ({ closeModal }) => {
   const [rating, setRating] = useState(0);
-  const [description, setDescription] = useState("");
-
+  const [review, setReview] = useState("");
+  const [ratingAuthor, { isSuccess, isError, error, isLoading }] =
+    useUserReviewMutation();
+  const dispatch = useDispatch(); // Redux dispatch
   // Review status mapping
   const reviewStatus = {
     1: "Very Bad",
@@ -13,14 +19,34 @@ const ReviewPopup = () => {
     4: "Good",
     5: "Very Good",
   };
-
+  // get localstorage id
+  const user_id = localStorage.getItem("userId");
   // handle review submit
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    setDescription("");
-    console.log(description, "this is description");
+    const res = await ratingAuthor({ user_id, rating, review });
+    console.log(res, "this is res of rating");
+    // Dispatch action to set isSuccess in Redux store
+    dispatch(setSuccess(true));
   };
 
+  // handle toast message
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Review and Rating added Successful!");
+      closeModal();
+    } else if (isError) {
+      console.log(error.data.message, "this is error");
+      toast.error(error.data.message);
+    }
+  }, [isSuccess, isError]);
+  // Reset values when reset prop changes
+  useEffect(() => {
+    if (isSuccess) {
+      setRating(0);
+      setReview("");
+    }
+  }, [isSuccess]);
   return (
     <div>
       <div className="flex h-full w-full justify-center items-center border-b border-border pb-5 mt-8 sm:mt-3">
@@ -45,8 +71,8 @@ const ReviewPopup = () => {
               type="text"
               id="message"
               maxLength="250"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
             />
           </div>
         </div>
@@ -55,8 +81,9 @@ const ReviewPopup = () => {
         <button
           className="bg-primary text-grey px-5 py-1 rounded-md"
           onClick={handleClick}
+          disabled={isLoading}
         >
-          Submit
+          {isLoading ? "Submiting..." : "Submit"}
         </button>
       </div>
     </div>

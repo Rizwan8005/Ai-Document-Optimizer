@@ -38,6 +38,7 @@ module.exports = {
         pink: "#FFE8F3",
         ratingsColor: "#171717",
         success: "#05B368",
+        decrease: "#ff302f",
         border: "#e4e4e4",
         inputBg: "#F1F1F1",
       },

@@ -1,20 +1,62 @@
-import React,{useState} from "react";
-import { ratings_data } from "../../Data/RatingsData";
+import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import ReviewPopup from "../../Utils/Modals/ReviewPopup/ReviewPopup";
+import { useGetReviewsApiQuery } from "../../store/services/services";
+import { Rate } from "antd";
+import { useSelector } from "react-redux";
+import { Navigation, Scrollbar, Autoplay } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Spin } from "antd";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const Ratings = () => {
- const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const { data, refetch, isLoading, isError, error } = useGetReviewsApiQuery();
+  console.log(data?.data, "this is data");
+  const isSuccess = useSelector((state) => state.success.isSuccess);
 
-   const showModal = () => {
-     setIsReviewModalOpen(true);
-   };
-   const handleOk = () => {
-     setIsReviewModalOpen(false);
-   };
-   const handleCancel = () => {
-     setIsReviewModalOpen(false);
-   };
+  const showModal = () => {
+    setIsReviewModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsReviewModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsReviewModalOpen(false);
+  };
+
+  // refetch data
+  useEffect(() => {
+    if (isSuccess) {
+      refetch();
+    }
+  }, [isSuccess]);
+
+// slides breakpoints
+  const breakpoints = {
+    1440: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 3,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    640: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    320: {
+      slidesPerView: 1,
+    },
+    280: {
+      slidesPerView: 1,
+    },
+  };
+
   return (
     <div className="px-40 xl:px-8 xs:px-4">
       <div className="flex justify-between mt-12 items-center sm:mt-1 sm:flex-col">
@@ -28,34 +70,51 @@ const Ratings = () => {
           Give Review
         </button>
       </div>
-      <div className="flex justify-between flex-wrap mt-10 text-ratingsColor sm:mt-5 md:gap-3">
-        {ratings_data.map((ratings, i) => {
-          return (
-            <div
-              className="w-[32%] md:w-[40%] h-[364px] sm:w-[100%] shadow-navbar-button p-7 rounded-md flex flex-col cursor-pointer md:p-3"
-              key={i}
-            >
-              <div className="flex justify-between items-center pb-3">
-                <div>{ratings.ratings}</div>
-                <div>
-                  <img src={ratings.ratings_img} alt="rating" />
+      <div className="w-full m-auto p-2">
+        {isLoading && (
+          <p className="text-center mt-5">
+            <Spin />
+          </p>
+        )}
+        {isError && <p>{error.message}</p>}
+        <Swiper
+          modules={[Navigation, Scrollbar, Autoplay]}
+          breakpoints={breakpoints}
+          spaceBetween={50}
+          slidesPerView={5}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          // Responsive breakpoints
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {data?.data?.map((ratings, i) => (
+            <SwiperSlide key={i}>
+              <div className="px-6 mb-4 py-3 mt-4 bg-primary rounded-md w-500 h-40">
+                <div className="flex justify-between items-center pb-2">
+                  <Rate value={ratings?.ratings[0]?.rating} disabled />
+                </div>
+                <p className="font-bold pb-2 lg:text-sm overflow-hidden whitespace-nowrap text-overflow-ellipsis">
+                  {ratings?.ratings[0]?.review}
+                </p>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <div className="flex items-center gap-1 pb-3">
+                      <i className="fas fa-user text-lightGrey"></i>
+                      <p className="font-bold">{ratings?.name}</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <i className="fas fa-envelope text-lightGrey"></i>
+                      <p>{ratings?.email}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <p className="font-bold pb-3 lg:text-sm">{ratings.title}</p>
-              <p className="text-sm">{ratings.desc}</p>
-              <div className="flex-grow"></div>
-              <div className="flex items-center gap-2">
-                <div>
-                  <img src={ratings.user_img} alt="users" className="w-8" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold">{ratings.user_name}</p>
-                  <p className="text-xs">{ratings.user_profession}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
       <Modal
         title={
@@ -75,7 +134,7 @@ const Ratings = () => {
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
       >
-        <ReviewPopup />
+        <ReviewPopup closeModal={handleOk} />
       </Modal>
     </div>
   );

@@ -11,10 +11,6 @@ const Pricing = () => {
     setFileCount(value);
   };
 
-  const onChangeComplete = (value) => {
-    console.log("onChangeComplete: ", value);
-  };
-
   return (
     <div className="px-40 lg:px-8 xs:px-4 mt-8 text-center">
       <div className="shadow-navbar-button py-7 rounded-md">
@@ -33,9 +29,8 @@ const Pricing = () => {
           </div>
           <div className="w-[8rem]">
             <Slider
-              defaultValue={14000}
+              defaultValue={500}
               onChange={onChangeSlider}
-              onChangeComplete={onChangeComplete}
               min={500}
               max={1000000}
               step={1000}
@@ -43,7 +38,7 @@ const Pricing = () => {
           </div>
           <div>
             <Flex vertical gap="middle">
-              <Radio.Group defaultValue="a" buttonStyle="solid">
+              <Radio.Group defaultValue="a" buttonStyle="solid" size="large">
                 <Radio.Button value="a">Monthly</Radio.Button>
                 <Radio.Button value="b">One-Time</Radio.Button>
               </Radio.Group>
@@ -52,7 +47,7 @@ const Pricing = () => {
         </div>
         <p className="text-converterColor mt-3 sm:text-sm sm:px-1">
           Corresponds to a one-time payment of{" "}
-          <span className="font-bold">$5.00</span>. Checkout the full
+          <span className="font-bold">$5.00</span>. Checkout the full&nbsp;
           <span className="text-primary">pricing</span> information.
         </p>
       </div>
