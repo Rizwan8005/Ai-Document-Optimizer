@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Modal } from "antd";
 import Logo from '../../assets/images/logo.png'
 import GenerateKeyPopup from '../../Utils/Modals/GenerateKeyPopup/GenerateKeyPopup';
+import Layout from '../../layout/Layout';
 
 const Header = () => {
  const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,48 +18,50 @@ const Header = () => {
     setIsModalOpen(false);
   };
   return (
-    <div className="px-40 lg:px-8 xs:px-4 mt-5">
-      <div className="flex justify-between items-center xs:flex-col xs:pb-3">
-        <div>
-          <img
-            src={Logo}
-            alt="logo"
-            className="w-[200px] md:w-150 sm:w-100 xs:w-40 cursor-pointer"
-          />
+    <Layout>
+      <div className="px-40 lg:px-8 xs:px-4 mt-5">
+        <div className="flex justify-between items-center xs:flex-col xs:pb-3">
+          <div>
+            <img
+              src={Logo}
+              alt="logo"
+              className="w-[200px] md:w-150 sm:w-100 xs:w-40 cursor-pointer"
+            />
+          </div>
+          <button
+            className="bg-primary text-grey px-5 py-1 rounded-md"
+            onClick={showModal}
+          >
+            Generate Key
+          </button>
         </div>
-        <button
-          className="bg-primary text-grey px-5 py-1 rounded-md"
-          onClick={showModal}
+        <div>
+          <p className="text-xs text-grey xs:text-center">
+            Home / Functionality / Revolutionize your PDF experience with AI
+            tools powered by ChatGPT /{" "}
+            <span className="text-disabledGrey">
+              Optimize Word Templates using AI
+            </span>
+          </p>
+        </div>
+        <Modal
+          title="Generate Key"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={() => {
+            handleCancel(); // Remove the extra closing parenthesis
+            setShouldResetForm(true);
+          }}
+          cancelButtonProps={{ style: { display: "none" } }}
+          okButtonProps={{ style: { display: "none" } }}
         >
-          Generate Key
-        </button>
+          <GenerateKeyPopup
+            shouldResetForm={shouldResetForm}
+            setShouldResetForm={setShouldResetForm}
+          />
+        </Modal>
       </div>
-      <div>
-        <p className="text-xs text-grey xs:text-center">
-          Home / Functionality / Revolutionize your PDF experience with AI tools
-          powered by ChatGPT /{" "}
-          <span className="text-disabledGrey">
-            Optimize Word Templates using AI
-          </span>
-        </p>
-      </div>
-      <Modal
-        title="Generate Key"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={() => {
-          handleCancel(); // Remove the extra closing parenthesis
-          setShouldResetForm(true);
-        }}
-        cancelButtonProps={{ style: { display: "none" } }}
-        okButtonProps={{ style: { display: "none" } }}
-      >
-        <GenerateKeyPopup
-          shouldResetForm={shouldResetForm}
-          setShouldResetForm={setShouldResetForm}
-        />
-      </Modal>
-    </div>
+    </Layout>
   );
 }
 

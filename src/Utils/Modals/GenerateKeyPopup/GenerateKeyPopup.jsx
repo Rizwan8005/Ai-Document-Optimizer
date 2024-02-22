@@ -3,6 +3,7 @@ import { useRegisterAuthorMutation } from "../../../store/services/services";
 import { Form, Input } from "antd";
 import { toast } from "react-toastify";
 import Paragraph from "antd/es/typography/Paragraph";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const GenerateKeyPopup = ({ shouldResetForm, setShouldResetForm }) => {
   const [form] = Form.useForm();
@@ -43,46 +44,57 @@ const GenerateKeyPopup = ({ shouldResetForm, setShouldResetForm }) => {
   }, [form, shouldResetForm]);
   return (
     <div className="p-6 sm:p-3 xs:p-1">
-      <Form form={form} onFinish={handleSubmit}>
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: "Please enter your name" }]}
-          labelCol={{ span: 24 }}
-          wrapperCol={{ span: 24 }}
-        >
-          <Input placeholder="enter your name" />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: "Please enter your email" }]}
-          labelCol={{ span: 24 }}
-          wrapperCol={{ span: 24 }}
-        >
-          <Input placeholder="enter your email" />
-        </Form.Item>
-        <Form.Item
-          label="Website (optional)"
-          name="website"
-          labelCol={{ span: 24 }}
-          wrapperCol={{ span: 24 }}
-        >
-          <Input placeholder="https://example.com" />
-        </Form.Item>
-      </Form>
-      {isSuccess && (
-        <div className="flex justify-between items-center pb-3">
-          <Paragraph copyable>Api key: {apiToken}</Paragraph>
-        </div>
+      {isSuccess ? (
+        <>
+          <div className="flex justify-between items-center pb-3 border-b border-border">
+            <p className="text-sm font-medium">Copy your API Key:</p>
+            <Paragraph copyable>{apiToken}</Paragraph>
+          </div>
+          <p className="text-sm font-medium mt-2">Please visit your Gmail.</p>
+        </>
+      ) : (
+        <>
+          <Form form={form} onFinish={handleSubmit}>
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: "Please enter your name" }]}
+              labelCol={{ span: 24 }}
+              wrapperCol={{ span: 24 }}
+            >
+              <Input placeholder="enter your name" />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please enter your email" }]}
+              labelCol={{ span: 24 }}
+              wrapperCol={{ span: 24 }}
+            >
+              <Input placeholder="enter your email" />
+            </Form.Item>
+            <Form.Item
+              label="Website (optional)"
+              name="website"
+              labelCol={{ span: 24 }}
+              wrapperCol={{ span: 24 }}
+            >
+              <Input placeholder="https://example.com" />
+            </Form.Item>
+          </Form>
+          <div
+            className="bg-primary text-center text-grey py-2 cursor-pointer disabled:bg-disabledButton"
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <LoadingOutlined className="text-2xl" spin />
+            ) : (
+              "Submit"
+            )}
+          </div>
+        </>
       )}
-      <div
-        className="bg-primary text-center text-grey py-2 cursor-pointer"
-        onClick={handleSubmit}
-        disabled={isLoading}
-      >
-        {isLoading ? "Submiting..." : "Submit"}
-      </div>
     </div>
   );
 };

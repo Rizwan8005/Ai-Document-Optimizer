@@ -25,6 +25,7 @@ module.exports = {
       colors: {
         mainBg: "#FDFDFD",
         primary: "#E2E9FC",
+        disabledButton: "#E1E2FC",
         grey: "#414141",
         darkGrey: "#5A5A5A",
         lightGrey: "#565f70",

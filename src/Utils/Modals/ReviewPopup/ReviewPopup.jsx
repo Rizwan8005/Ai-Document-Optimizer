@@ -1,23 +1,24 @@
-import React, { useState,useEffect } from "react";
+import React, { useEffect } from "react";
 import { Rate } from "antd";
 import { useUserReviewMutation } from "../../../store/services/services";
 import { toast } from "react-toastify";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { setSuccess } from "../../../store/slices/statusSlice";
+import { LoadingOutlined } from "@ant-design/icons";
 
-const ReviewPopup = ({ closeModal }) => {
-  const [rating, setRating] = useState(0);
-  const [review, setReview] = useState("");
+const ReviewPopup = ({ closeModal, rating, review, setRating, setReview }) => {
+  // const [rating, setRating] = useState();
+  // const [review, setReview] = useState("");
   const [ratingAuthor, { isSuccess, isError, error, isLoading }] =
     useUserReviewMutation();
   const dispatch = useDispatch(); // Redux dispatch
   // Review status mapping
   const reviewStatus = {
-    1: "Very Bad",
-    2: "Bad",
-    3: "Medium",
-    4: "Good",
-    5: "Very Good",
+    1: "😞",
+    2: "😕",
+    3: "😐",
+    4: "😊",
+    5: "😄",
   };
   // get localstorage id
   const user_id = localStorage.getItem("userId");
@@ -36,7 +37,6 @@ const ReviewPopup = ({ closeModal }) => {
       toast.success("Review and Rating added Successful!");
       closeModal();
     } else if (isError) {
-      console.log(error.data.message, "this is error");
       toast.error(error.data.message);
     }
   }, [isSuccess, isError]);
@@ -46,15 +46,20 @@ const ReviewPopup = ({ closeModal }) => {
       setRating(0);
       setReview("");
     }
+    console.log("check");
+    return () => {
+      console.log("inner check");
+    };
   }, [isSuccess]);
+
   return (
     <div>
       <div className="flex h-full w-full justify-center items-center border-b border-border pb-5 mt-8 sm:mt-3">
         <div className="text-center w-full">
           <p className="text-5xl font-bold pb-4 sm:text-2xl sm:pb-1">
-            {rating ? rating : "Give Review"}
+            {!rating && "Give Review"}
           </p>
-          <p className="text-lg font-semibold pb-2">{reviewStatus[rating]}</p>
+          <p className="text-4xl font-semibold pb-2">{reviewStatus[rating]}</p>
           <div className="pb-4">
             <Rate
               value={rating}
@@ -83,7 +88,7 @@ const ReviewPopup = ({ closeModal }) => {
           onClick={handleClick}
           disabled={isLoading}
         >
-          {isLoading ? "Submiting..." : "Submit"}
+          {isLoading ? <LoadingOutlined className="text-2xl" spin /> : "Submit"}
         </button>
       </div>
     </div>
