@@ -7,8 +7,6 @@ import { setSuccess } from "../../../store/slices/statusSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const ReviewPopup = ({ closeModal, rating, review, setRating, setReview }) => {
-  // const [rating, setRating] = useState();
-  // const [review, setReview] = useState("");
   const [ratingAuthor, { isSuccess, isError, error, isLoading }] =
     useUserReviewMutation();
   const dispatch = useDispatch(); // Redux dispatch
@@ -25,6 +23,10 @@ const ReviewPopup = ({ closeModal, rating, review, setRating, setReview }) => {
   // handle review submit
   const handleClick = async (e) => {
     e.preventDefault();
+     if (!rating || !review) {
+       toast.error("Please fill both fields.");
+       return;
+     }
     const res = await ratingAuthor({ user_id, rating, review });
     console.log(res, "this is res of rating");
     // Dispatch action to set isSuccess in Redux store
@@ -46,10 +48,6 @@ const ReviewPopup = ({ closeModal, rating, review, setRating, setReview }) => {
       setRating(0);
       setReview("");
     }
-    console.log("check");
-    return () => {
-      console.log("inner check");
-    };
   }, [isSuccess]);
 
   return (
