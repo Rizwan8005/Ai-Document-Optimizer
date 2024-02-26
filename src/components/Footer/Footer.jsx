@@ -1,5 +1,6 @@
 import React from "react";
-// import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom"
 // import GooglePlayStore from "../../assets/icons/google.svg";
 // import AppStore from "../../assets/icons/app-store.svg";
 // import Twitter from "../../assets/icons/twitter.svg";
@@ -7,14 +8,21 @@ import Layout from "../../layout/Layout";
 
 const Footer = () => {
   return (
-    <footer className="px-4 mt-14 bg-primary">
+    <footer className="mt-14 bg-primary sm:mt-4">
       <Layout>
-        <footer>
-          <p className=" py-4 text-center">
-          Copyright © 2024 DocHub
-          </p>
-        </footer>
-        {/* <div className="flex flex-wrap xs:flex-col border-t-[1px] py-6 border-border">
+        <div className="px-40 lg:px-8 xs:px-4 flex justify-between items-center sm:flex-col sm:items-start sm:text-xs">
+          <div>
+            <img
+              className="w-[180px] h-[60px] object-cover cursor-pointer sm:w-[120px]"
+              src={Logo}
+              alt="Logo"
+            />
+          </div>
+          <p className="sm:pb-2">copyright © 2024 Docoptimizer</p>
+          <Link to="/terms-and-conditions">
+            <p>Terms and Conditions</p>
+          </Link>
+          {/* <div className="flex flex-wrap xs:flex-col border-t-[1px] py-6 border-border">
           <div className="w-1/6 md:w-1/2 pr-10 md:pr-5 xs:pr-0 xs:w-full md:mb-5 xs:mb-2">
             <div className="mb-2 xs:mb-2">
               <img className="w-[180px] cursor-pointer" src={Logo} alt="Logo" />
@@ -141,6 +149,7 @@ const Footer = () => {
             </div>
           </div>
         </div> */}
+        </div>
       </Layout>
     </footer>
   );

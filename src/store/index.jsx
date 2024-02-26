@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import successReducer from './slices/statusSlice';
+import successCounterReducer from './slices/counterSlice'
+
 import {
   registerAuthApi,
   counterApi,
@@ -11,6 +13,7 @@ import {
 const store = configureStore({
   reducer: {
     success: successReducer,
+    updateCounter: successCounterReducer,
     [registerAuthApi.reducerPath]: registerAuthApi.reducer,
     [counterApi.reducerPath]: counterApi.reducer,
     [reviewApi.reducerPath]: reviewApi.reducer,

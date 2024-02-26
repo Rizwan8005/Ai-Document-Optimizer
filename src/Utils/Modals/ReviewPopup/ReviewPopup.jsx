@@ -54,8 +54,8 @@ const ReviewPopup = ({ closeModal, rating, review, setRating, setReview }) => {
     <div>
       <div className="flex h-full w-full justify-center items-center border-b border-border pb-5 mt-8 sm:mt-3">
         <div className="text-center w-full">
-          <p className="text-5xl font-bold pb-4 sm:text-2xl sm:pb-1">
-            {!rating && "Give Review"}
+          <p className="text-3xl font-bold pb-4 sm:text-2xl sm:pb-1">
+            {!rating ? "Give Review" : "Thanks for the Review"}
           </p>
           <p className="text-4xl font-semibold pb-2">{reviewStatus[rating]}</p>
           <div className="pb-4">

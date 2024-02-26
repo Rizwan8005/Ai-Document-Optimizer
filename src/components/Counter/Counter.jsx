@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SignedForms from "../../assets/icons/filled-forms.svg";
 import SignedForm from "../../assets/icons/signed-forms.svg";
 import FormsSend from "../../assets/icons/forms-send.svg";
@@ -8,15 +8,21 @@ import {
   useCountApiHitsQuery,
 } from "../../store/services/services";
 import Layout from '../../layout/Layout';
+import { useSelector } from 'react-redux';
 
 const Counter = () => {
-  const { data, isLoading, isError, error } = useGetCounterApiQuery();
+  const { data, refetch, isLoading, isError, error } = useGetCounterApiQuery();
   const {
     data: countHitApiData,
     isLoading: countHitIsLoadingData,
     isError: countHitIsError,
     error: countHitError,
   } = useCountApiHitsQuery();
+// getting redux value
+const isCounterUpdate = useSelector(
+  (state) => state.updateCounter.isCounterUpdate
+);
+console.log(isCounterUpdate, "this is isCounterUpdate");
 // current data
 const currentDate = new Date();
  const formattedDate = currentDate.toLocaleDateString("en-US", {
@@ -24,7 +30,12 @@ const currentDate = new Date();
    day: "numeric",
    year: "numeric",
  });
-
+// refetch api data
+useEffect(() => {
+  if (isCounterUpdate) {
+    refetch();
+  }
+}, [isCounterUpdate]);
   return (
     <Layout>
       <div className="px-40 lg:px-8 xs:px-4">

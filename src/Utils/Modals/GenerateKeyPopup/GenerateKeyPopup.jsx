@@ -4,13 +4,16 @@ import { Form, Input } from "antd";
 import { toast } from "react-toastify";
 import Paragraph from "antd/es/typography/Paragraph";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import {setCounterUpdate} from '../../../store/slices/counterSlice'
 
 const GenerateKeyPopup = ({ shouldResetForm, setShouldResetForm }) => {
   const [form] = Form.useForm();
   const [apiToken, setApiToken] = useState(null);
   const [isSuccessPopup, setIsSuccessPopup] = useState(false);
   const [registerAuthor, { isSuccess, isError, error, isLoading }] =
-    useRegisterAuthorMutation();
+   useRegisterAuthorMutation();
+  const dispatch = useDispatch()
 
   // handle submit
   const handleSubmit = async () => {
@@ -19,6 +22,7 @@ const GenerateKeyPopup = ({ shouldResetForm, setShouldResetForm }) => {
       const values = form.getFieldsValue();
       const res = await registerAuthor(values);
       setApiToken(res?.data?.data?.token);
+      dispatch(setCounterUpdate(true));
       // Store user id in localStorage
       localStorage.setItem("userId", res?.data?.data?.user?.id);
       setIsSuccessPopup(true);
@@ -30,7 +34,7 @@ const GenerateKeyPopup = ({ shouldResetForm, setShouldResetForm }) => {
   // handle toast message
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Sign-up successful!");
+      toast.success("token generated successful!");
     } else if (isError) {
       console.log(error.data.message, "this is error");
       toast.error(error.data.message);
@@ -48,13 +52,15 @@ const GenerateKeyPopup = ({ shouldResetForm, setShouldResetForm }) => {
 
   return (
     <div className="p-6 sm:p-3 xs:p-1">
-      {isSuccessPopup ? (
+      {isSuccess && isSuccessPopup ? (
         <>
           <div className="flex justify-between items-center pb-3 border-b border-border">
             <p className="text-sm font-medium">Copy your API Key:</p>
             <Paragraph copyable>{apiToken}</Paragraph>
           </div>
-          <p className="text-sm font-medium mt-2">Please Visit your Gmail for Api Token.</p>
+          <p className="text-sm font-medium mt-2">
+            Please visit to your Gmail inbox for the API token.
+          </p>
         </>
       ) : (
         <>

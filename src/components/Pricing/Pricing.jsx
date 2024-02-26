@@ -47,10 +47,10 @@ const Pricing = () => {
               </Flex>
             </div>
           </div>
-          <p className="text-converterColor mt-3 sm:text-sm sm:px-1">
-            Corresponds to a one-time payment of{" "}
-            <span className="font-bold">$5.00</span>. Checkout the full&nbsp;
-            <span className="text-primary">pricing</span> information.
+          <p className="text-lg font-bold text-converterColor mt-3 sm:text-sm sm:px-1">
+           From now it's free
+            {/* <span className="font-bold">$5.00</span>. Checkout the full&nbsp;
+            <span className="text-primary">pricing</span> information. */}
           </p>
         </div>
       </div>

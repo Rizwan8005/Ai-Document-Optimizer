@@ -25,6 +25,7 @@ module.exports = {
       colors: {
         mainBg: "#FDFDFD",
         primary: "#E2E9FC",
+        apiDoc: "#edf0ff",
         disabledButton: "#E1E2FC",
         grey: "#414141",
         darkGrey: "#5A5A5A",
@@ -40,6 +41,8 @@ module.exports = {
         ratingsColor: "#171717",
         success: "#05B368",
         decrease: "#ff302f",
+        borderColor: "#FF4D4F",
+        yellowColor: "#F9B71C",
         border: "#e4e4e4",
         inputBg: "#F1F1F1",
       },

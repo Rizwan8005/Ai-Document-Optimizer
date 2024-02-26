@@ -60,14 +60,75 @@ const ApiStructure = () => {
           </div>
         </div>
         <div className="bg-mainDark text-mainBg p-4 rounded-md flex sm:text-xs">
-          <p>POST http://127.0.0.1:8000/api/v1/send-file</p>
+          <p>
+            <span className="bg-yellowColor px-2 py-1 rounded-md mr-1">POST</span>{" "}
+            http://127.0.0.1:8000/api/v1/send-file
+          </p>
         </div>
+
         <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
-          <h2>JSON Data:</h2>
-          <pre>{JSON.stringify(selectedData?.jsonData, null, 2)}</pre>
-          <h2>Body Data:</h2>
-          <pre>{JSON.stringify(selectedData?.bodyData, null, 2)}</pre>
+          <h2>Body Response:</h2>
+          <pre>
+            {`{\n`}
+            <span className="text-success">"status"</span>:{" "}
+            <span className="text-decrease">"Number/Integer"</span>,{"\n"}
+            <span className="text-success">"message"</span>:{" "}
+            <span className="text-decrease">"string"</span>,{"\n"}
+            <span className="text-success">"path"</span>:{" "}
+            <span className="text-decrease">"string"</span>
+            {`\n}`}
+          </pre>
+          <h2>JSON Response:</h2>
+          <pre>
+            {`{\n`}
+            <span className="text-success">"status"</span>:{" "}
+            <span className="text-decrease">"Number/Integer"</span>,{"\n"}
+            <span className="text-success">"message"</span>:{" "}
+            <span className="text-decrease">"string"</span>,{"\n"}
+            <span className="text-success">"path"</span>:{" "}
+            <span className="text-decrease">"string"</span>
+            {`\n}`}
+          </pre>
         </div>
+
+        {selectedDataType === "video" && (
+          <div className="mt-5">
+            <div className="bg-mainDark text-mainBg p-4 rounded-md flex sm:text-xs">
+              <p>
+                <span className="bg-yellowColor px-2 py-1 rounded-md mr-1">
+                  POST
+                </span>{" "}
+                http://127.0.0.1:8000/api/v1/send-file
+              </p>
+            </div>
+            <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
+              <h2>Body Response:</h2>
+              <pre>
+                {`{\n`}
+                <span className="text-success">"status"</span>:{" "}
+                <span className="text-decrease">"Number/Integer"</span>,
+                {"\n"}
+                <span className="text-success">"message"</span>:{" "}
+                <span className="text-decrease">"string"</span>,{"\n"}
+                <span className="text-success">"path"</span>:{" "}
+                <span className="text-decrease">"string"</span>
+                {`\n}`}
+              </pre>
+              <h2>JSON Response:</h2>
+              <pre>
+                {`{\n`}
+                <span className="text-success">"status"</span>:{" "}
+                <span className="text-decrease">"Number/Integer"</span>,
+                {"\n"}
+                <span className="text-success">"message"</span>:{" "}
+                <span className="text-decrease">"string"</span>,{"\n"}
+                <span className="text-success">"path"</span>:{" "}
+                <span className="text-decrease">"string"</span>
+                {`\n}`}
+              </pre>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );

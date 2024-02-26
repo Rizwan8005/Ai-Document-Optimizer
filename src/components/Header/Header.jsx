@@ -3,6 +3,7 @@ import { Modal } from "antd";
 import Logo from '../../assets/images/logo.png'
 import GenerateKeyPopup from '../../Utils/Modals/GenerateKeyPopup/GenerateKeyPopup';
 import Layout from '../../layout/Layout';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
  const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,13 +22,15 @@ const Header = () => {
     <Layout>
       <div className="px-40 lg:px-8 xs:px-4 mt-5">
         <div className="flex justify-between items-center xs:flex-col xs:pb-3">
-          <div>
-            <img
-              src={Logo}
-              alt="logo"
-              className="w-[200px] md:w-150 sm:w-100 xs:w-40 cursor-pointer"
-            />
-          </div>
+          <Link to='/'>
+            <div>
+              <img
+                src={Logo}
+                alt="logo"
+                className="w-[200px] md:w-150 sm:w-100 xs:w-40 cursor-pointer"
+              />
+            </div>
+          </Link>
           <button
             className="bg-primary text-grey px-5 py-1 rounded-md"
             onClick={showModal}

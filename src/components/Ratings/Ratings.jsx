@@ -83,7 +83,7 @@ const Ratings = () => {
       <div className="px-40 xl:px-8 xs:px-4">
         <div className="flex justify-between mt-12 items-center sm:mt-1 sm:flex-col">
           <h1 className="text-[44px] font-bold lg:text-2xl sm:text-lg sm:text-center sm:mt-5">
-            See why our customers choose DocHub
+            See why our customers choose Docoptimizer
           </h1>
           <button
             className="bg-primary text-grey px-5 py-1 rounded-md sm:mt-2"
@@ -92,7 +92,7 @@ const Ratings = () => {
             Give Review
           </button>
         </div>
-        <div className="w-full m-auto p-2">
+        <div className="w-full m-auto">
           {isLoading && (
             <p className="text-center mt-5">
               <Spin />
