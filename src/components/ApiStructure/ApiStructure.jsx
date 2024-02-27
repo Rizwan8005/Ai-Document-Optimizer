@@ -5,36 +5,36 @@ import Layout from "../../layout/Layout";
 const ApiStructure = () => {
   const [selectedDataType, setSelectedDataType] = useState("file");
 
-  // body data
-  const bodyData = {
-    file: "file required",
-    token: "string required",
-  };
-  //json data
-  const fileData = {
-    status: "Number/Integer",
-    message: "string",
-    path: "string",
-  };
-  // JSON schema for audio and video data
-  const videoData = {
-    status: "Number/Integer",
-    message: "string",
-    path: "string",
-  };
-  const audioData = {
-    status: "Number/Integer",
-    message: "string",
-    path: "string",
-  };
+  // // body data
+  // const bodyData = {
+  //   file: "file required",
+  //   token: "string required",
+  // };
+  // //json data
+  // const fileData = {
+  //   status: "Number/Integer",
+  //   message: "string",
+  //   path: "string",
+  // };
+  // // JSON schema for audio and video data
+  // const videoData = {
+  //   status: "Number/Integer",
+  //   message: "string",
+  //   path: "string",
+  // };
+  // const audioData = {
+  //   status: "Number/Integer",
+  //   message: "string",
+  //   path: "string",
+  // };
 
 
-  let selectedData;
-  if (selectedDataType === "file") {
-    selectedData = { jsonData: fileData, bodyData };
-  } else if (selectedDataType === "video") {
-    selectedData = { jsonData: audioData, bodyData: videoData };
-  }
+  // let selectedData;
+  // if (selectedDataType === "file") {
+  //   selectedData = { jsonData: fileData, bodyData };
+  // } else if (selectedDataType === "video") {
+  //   selectedData = { jsonData: audioData, bodyData: videoData };
+  // }
 
   return (
     <Layout>
@@ -61,35 +61,61 @@ const ApiStructure = () => {
         </div>
         <div className="bg-mainDark text-mainBg p-4 rounded-md flex sm:text-xs">
           <p>
-            <span className="bg-yellowColor px-2 py-1 rounded-md mr-1">POST</span>{" "}
-            http://127.0.0.1:8000/api/v1/send-file
+            <span className="bg-yellowColor px-2 py-1 rounded-md mr-1">
+              POST
+            </span>{" "}
+            {selectedDataType === "file"
+              ? "http://127.0.0.1:8000/api/v1/send-file"
+              : "http://127.0.0.1:8000/api/v1/get-file-metadata"}
           </p>
         </div>
-
-        <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
-          <h2>Body Response:</h2>
-          <pre>
-            {`{\n`}
-            <span className="text-success">"status"</span>:{" "}
-            <span className="text-decrease">"Number/Integer"</span>,{"\n"}
-            <span className="text-success">"message"</span>:{" "}
-            <span className="text-decrease">"string"</span>,{"\n"}
-            <span className="text-success">"path"</span>:{" "}
-            <span className="text-decrease">"string"</span>
-            {`\n}`}
-          </pre>
-          <h2>JSON Response:</h2>
-          <pre>
-            {`{\n`}
-            <span className="text-success">"status"</span>:{" "}
-            <span className="text-decrease">"Number/Integer"</span>,{"\n"}
-            <span className="text-success">"message"</span>:{" "}
-            <span className="text-decrease">"string"</span>,{"\n"}
-            <span className="text-success">"path"</span>:{" "}
-            <span className="text-decrease">"string"</span>
-            {`\n}`}
-          </pre>
-        </div>
+        {selectedDataType === "file" ? (
+          <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
+            <h2>Body Data:</h2>
+            <pre>
+              {`{\n`}
+              <span className="text-success">"apiToken"</span>:{" "}
+              <span className="text-decrease">"string"</span>,{"\n"}
+              <span className="text-success">"file"</span>:{" "}
+              <span className="text-decrease">"string"</span>
+              {`\n}`}
+            </pre>
+            <h2>JSON Response:</h2>
+            <pre>
+              {`{\n`}
+              <span className="text-success">"status"</span>:{" "}
+              <span className="text-decrease">"integer"</span>,{"\n"}
+              <span className="text-success">"message"</span>:{" "}
+              <span className="text-decrease">"string"</span>,{"\n"}
+              <span className="text-success">"data"</span>:{" "}
+              <span className="text-decrease">"string"</span>
+              {`\n}`}
+            </pre>
+          </div>
+        ) : (
+          <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
+            <h2>Body Data:</h2>
+            <pre>
+              {`{\n`}
+              <span className="text-success">"apiToken"</span>:{" "}
+              <span className="text-decrease">"string"</span>,{"\n"}
+              <span className="text-success">"videoFile"</span>:{" "}
+              <span className="text-decrease">"string"</span>
+              {`\n}`}
+            </pre>
+            <h2>JSON Response:</h2>
+            <pre>
+              {`{\n`}
+              <span className="text-success">"status"</span>:{" "}
+              <span className="text-decrease">"integer"</span>,{"\n"}
+              <span className="text-success">"message"</span>:{" "}
+              <span className="text-decrease">"string"</span>,{"\n"}
+              <span className="text-success">"data"</span>:{" "}
+              <span className="text-decrease">"string"</span>
+              {`\n}`}
+            </pre>
+          </div>
+        )}
 
         {selectedDataType === "video" && (
           <div className="mt-5">
@@ -98,31 +124,28 @@ const ApiStructure = () => {
                 <span className="bg-yellowColor px-2 py-1 rounded-md mr-1">
                   POST
                 </span>{" "}
-                http://127.0.0.1:8000/api/v1/send-file
+                http://127.0.0.1:8000/api/v1/send-video-file
               </p>
             </div>
             <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
-              <h2>Body Response:</h2>
+              <h2>Body Data:</h2>
               <pre>
                 {`{\n`}
-                <span className="text-success">"status"</span>:{" "}
-                <span className="text-decrease">"Number/Integer"</span>,
-                {"\n"}
-                <span className="text-success">"message"</span>:{" "}
+                <span className="text-success">"apiToken"</span>:{" "}
                 <span className="text-decrease">"string"</span>,{"\n"}
-                <span className="text-success">"path"</span>:{" "}
-                <span className="text-decrease">"string"</span>
-                {`\n}`}
+                <span className="text-success">"videoFile"</span>:{" "}
+                <span className="text-decrease">"string"</span>,{"\n"}
+                <span className="text-success">"quality"</span>:{" "}
+                <span className="text-decrease">"integer"</span>{"\n"}
               </pre>
               <h2>JSON Response:</h2>
               <pre>
                 {`{\n`}
                 <span className="text-success">"status"</span>:{" "}
-                <span className="text-decrease">"Number/Integer"</span>,
-                {"\n"}
+                <span className="text-decrease">"integer"</span>,{"\n"}
                 <span className="text-success">"message"</span>:{" "}
                 <span className="text-decrease">"string"</span>,{"\n"}
-                <span className="text-success">"path"</span>:{" "}
+                <span className="text-success">"data"</span>:{" "}
                 <span className="text-decrease">"string"</span>
                 {`\n}`}
               </pre>
