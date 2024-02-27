@@ -5,37 +5,6 @@ import Layout from "../../layout/Layout";
 const ApiStructure = () => {
   const [selectedDataType, setSelectedDataType] = useState("file");
 
-  // // body data
-  // const bodyData = {
-  //   file: "file required",
-  //   token: "string required",
-  // };
-  // //json data
-  // const fileData = {
-  //   status: "Number/Integer",
-  //   message: "string",
-  //   path: "string",
-  // };
-  // // JSON schema for audio and video data
-  // const videoData = {
-  //   status: "Number/Integer",
-  //   message: "string",
-  //   path: "string",
-  // };
-  // const audioData = {
-  //   status: "Number/Integer",
-  //   message: "string",
-  //   path: "string",
-  // };
-
-
-  // let selectedData;
-  // if (selectedDataType === "file") {
-  //   selectedData = { jsonData: fileData, bodyData };
-  // } else if (selectedDataType === "video") {
-  //   selectedData = { jsonData: audioData, bodyData: videoData };
-  // }
-
   return (
     <Layout>
       <div className="px-40 lg:px-8 xs:px-4">
@@ -73,20 +42,18 @@ const ApiStructure = () => {
           <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
             <h2>Body Data:</h2>
             <pre>
-              {`{\n`}
-              <span className="text-success">"apiToken"</span>:{" "}
-              <span className="text-decrease">"string"</span>,{"\n"}
+              {`{\n`} <span className="text-success">"apiToken"</span>:{" "}
+              <span className="text-decrease">"string"</span>,{"\n"}{" "}
               <span className="text-success">"file"</span>:{" "}
               <span className="text-decrease">"string"</span>
               {`\n}`}
             </pre>
             <h2>JSON Response:</h2>
             <pre>
-              {`{\n`}
-              <span className="text-success">"status"</span>:{" "}
-              <span className="text-decrease">"integer"</span>,{"\n"}
+              {`{\n`} <span className="text-success">"status"</span>:{" "}
+              <span className="text-decrease">"integer"</span>,{"\n"}{" "}
               <span className="text-success">"message"</span>:{" "}
-              <span className="text-decrease">"string"</span>,{"\n"}
+              <span className="text-decrease">"string"</span>,{"\n"}{" "}
               <span className="text-success">"data"</span>:{" "}
               <span className="text-decrease">"string"</span>
               {`\n}`}
@@ -96,20 +63,18 @@ const ApiStructure = () => {
           <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
             <h2>Body Data:</h2>
             <pre>
-              {`{\n`}
-              <span className="text-success">"apiToken"</span>:{" "}
-              <span className="text-decrease">"string"</span>,{"\n"}
+              {`{\n`} <span className="text-success">"apiToken"</span>:{" "}
+              <span className="text-decrease">"string"</span>,{"\n"}{" "}
               <span className="text-success">"videoFile"</span>:{" "}
               <span className="text-decrease">"string"</span>
               {`\n}`}
             </pre>
             <h2>JSON Response:</h2>
             <pre>
-              {`{\n`}
-              <span className="text-success">"status"</span>:{" "}
-              <span className="text-decrease">"integer"</span>,{"\n"}
+              {`{\n`} <span className="text-success">"status"</span>:{" "}
+              <span className="text-decrease">"integer"</span>,{"\n"}{" "}
               <span className="text-success">"message"</span>:{" "}
-              <span className="text-decrease">"string"</span>,{"\n"}
+              <span className="text-decrease">"string"</span>,{"\n"}{" "}
               <span className="text-success">"data"</span>:{" "}
               <span className="text-decrease">"string"</span>
               {`\n}`}
@@ -130,21 +95,20 @@ const ApiStructure = () => {
             <div className="bg-mainDark text-mainBg p-4 rounded-md mt-4 sm:text-xs">
               <h2>Body Data:</h2>
               <pre>
-                {`{\n`}
-                <span className="text-success">"apiToken"</span>:{" "}
-                <span className="text-decrease">"string"</span>,{"\n"}
+                {`{\n`} <span className="text-success">"apiToken"</span>:{" "}
+                <span className="text-decrease">"string"</span>,{"\n"}{" "}
                 <span className="text-success">"videoFile"</span>:{" "}
-                <span className="text-decrease">"string"</span>,{"\n"}
+                <span className="text-decrease">"string"</span>,{"\n"}{" "}
                 <span className="text-success">"quality"</span>:{" "}
-                <span className="text-decrease">"integer"</span>{"\n"}
+                <span className="text-decrease">"integer"</span>
+                {"\n"}
               </pre>
               <h2>JSON Response:</h2>
               <pre>
-                {`{\n`}
-                <span className="text-success">"status"</span>:{" "}
-                <span className="text-decrease">"integer"</span>,{"\n"}
+                {`{\n`} <span className="text-success">"status"</span>:{" "}
+                <span className="text-decrease">"integer"</span>,{"\n"}{" "}
                 <span className="text-success">"message"</span>:{" "}
-                <span className="text-decrease">"string"</span>,{"\n"}
+                <span className="text-decrease">"string"</span>,{"\n"}{" "}
                 <span className="text-success">"data"</span>:{" "}
                 <span className="text-decrease">"string"</span>
                 {`\n}`}

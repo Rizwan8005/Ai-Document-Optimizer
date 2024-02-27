@@ -10,18 +10,25 @@ const Footer = () => {
   return (
     <footer className="mt-14 bg-primary sm:mt-4">
       <Layout>
-        <div className="px-40 lg:px-8 xs:px-4 flex justify-between items-center sm:flex-col sm:items-start sm:text-xs">
-          <div>
-            <img
-              className="w-[180px] h-[60px] object-cover cursor-pointer sm:w-[120px]"
-              src={Logo}
-              alt="Logo"
-            />
-          </div>
-          <p className="sm:pb-2">copyright © 2024 Docoptimizer</p>
-          <Link to="/terms-and-conditions">
-            <p>Terms and Conditions</p>
+        <div className="px-40 lg:px-8 xs:px-4 flex justify-between items-center md:flex-col md:items-start sm:text-xs">
+          <Link to="/">
+            <div>
+              <img
+                className="w-[180px] h-[60px] object-cover cursor-pointer sm:w-[120px]"
+                src={Logo}
+                alt="Logo"
+              />
+            </div>
           </Link>
+          <p className="sm:pb-2">copyright © 2024 Docoptimizer</p>
+          <ul className="flex md:flex-col">
+            <li className="mr-4 md:pb-1">
+              <Link to="/terms-and-conditions">Terms and Conditions</Link>
+            </li>
+            <li>
+              <Link to="/privacy-policy">Privacy Policy</Link>
+            </li>
+          </ul>
           {/* <div className="flex flex-wrap xs:flex-col border-t-[1px] py-6 border-border">
           <div className="w-1/6 md:w-1/2 pr-10 md:pr-5 xs:pr-0 xs:w-full md:mb-5 xs:mb-2">
             <div className="mb-2 xs:mb-2">
