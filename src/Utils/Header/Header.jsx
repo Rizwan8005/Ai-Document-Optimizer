@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { Modal } from "antd";
 import Logo from '../../assets/images/logo.png'
-import GenerateKeyPopup from '../../Utils/Modals/GenerateKeyPopup/GenerateKeyPopup';
+import GenerateKeyPopup from '../Modals/GenerateKeyPopup/GenerateKeyPopup';
 import Layout from '../../layout/Layout';
 import { Link } from 'react-router-dom';
 
